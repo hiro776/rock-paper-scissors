@@ -15,7 +15,8 @@ let playerPlay = () => {
     playerSelection = prompt('Rock, Paper, Scissors ').toLowerCase();
 
     if (! rps.includes(playerSelection)) {
-        alert('Invalid Input!!!')
+        alert('Invalid Input!!!');
+        playerSelection = '';
     }
 }
 
