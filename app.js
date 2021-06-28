@@ -12,21 +12,34 @@ const rps = ['rock', 'paper', 'scissors'];
 let playerSelection = '';
 let computerSelection = '';
 
+// looking into computer's choices via pictures
+const compImg = document.querySelector('.computer');
+const compImgSrc = compImg.getAttribute('src');
+const status = document.querySelector('.status');
+
 
 // set the playerSelecton depending on as
 // event p ('click' event) 's target is rock, paper or scissors
 const playUser = (p) => {
     playerSelection = p.target.getAttribute('data-rps');
 
-    console.log(p.target.getAttribute('data-rps'));
+    // p.target.style.cssText = 'box-shadow: 0 0 30px red';
+
+    // console.log(p.target.getAttribute('data-rps'));
 
     //computer plays as the player plays so
     playComputer();
 
     // finally determine who won
     playRound();
-}
 
+    // reset all styling after 2 seconds
+    setTimeout(function () {
+        compImg.setAttribute('src', compImgSrc);
+        status.textContent = '';
+    }, 1000);
+
+}
 
 const userWeapons = Array.from(document.querySelectorAll('.rps'));
 userWeapons.forEach(weapon => {
@@ -39,8 +52,8 @@ userWeapons.forEach(weapon => {
 const playComputer = () => {
     computerSelection = rps[Math.floor(Math.random() * rps.length)];
 
-    // const compImg = document.querySelector('.computer');
 
+    compImg.setAttribute('src', `img/${computerSelection}.png`);
 };
 
 
@@ -54,20 +67,13 @@ function playRound() {
     if (playerSelection === 'rock' && computerSelection === 'scissors' ||
         playerSelection === 'scissors' && computerSelection === 'paper' ||
         playerSelection === 'paper' && computerSelection === 'rock') {
-        console.log('You won! ' + playerSelection + ' beats ' + computerSelection);
+        status.textContent = 'You won! ' + playerSelection + ' beats ' + computerSelection;
     }
     else if (playerSelection === computerSelection) {
-        console.log('Tie! Both won.');
+        status.textContent = 'Tie! Both won.';
     }
     else {
-        console.log('You Lost! ' + computerSelection + ' beats ' + playerSelection);
+        status.textContent = 'You Lost! ' + computerSelection + ' beats ' + playerSelection;
     }
+
 }
-
-// // pass in the number of times to play the game
-// let game = (i) => {
-//     while(i-- > 0)
-        // playRound();
-// }
-
-// game(5);
