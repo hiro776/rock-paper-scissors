@@ -1,0 +1,88 @@
+/* 
+ * Styling for UI
+ *
+ * Author: R Mehta (github@hiro776)
+ *
+ */
+
+/* font-family: 'Yellowtail', cursive; */
+
+@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 16pt;
+    font-family: 'Yellowtail', cursive;
+
+    background: rgb(255, 218, 7);
+    background: linear-gradient(180deg, rgba(255, 218, 7, 0.9367088607594937) 0%, rgba(0, 129, 255, 0.7566807313642756) 24%, rgba(51, 109, 85, 0.8677918424753868) 50%, rgba(77, 154, 206, 0.8832630098452883) 82%);
+}
+
+/* Header Styles */
+
+header {
+    /* width: 100%; */
+    font-size: 1.5em;
+    text-align: center;
+    padding: 0.65rem;
+    
+    background: rgb(25, 212, 103);
+    background: linear-gradient(90deg, rgba(255, 166, 46, 1) 12%, rgba(255, 180, 0, 1) 37%, rgba(101, 109, 51, 1) 74%, rgba(0, 212, 255, 1) 98%);
+    text-shadow: -2px 2px teal;
+    /* color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text; */
+}
+
+/* Main Application Styling */
+
+.container {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.w-sec {
+    padding: 1rem;
+    min-height: 1rem;
+}
+
+.top {
+    margin-top: .5rem;
+}
+
+/* style the user interactive section */
+
+.user {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* width: 100%; */
+}
+
+/* the status styling */
+
+.status {
+    height: 1.5rem;
+    color: rgb(0, 0, 0);
+}
+
+/* Image Styles */
+
+.computer {
+    max-width: 300px;
+}
+
+.rps {
+    width: 100px;
+    height: 100px;
+    margin: 1rem;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 50%;
+}
+
+img {
+    width: 100%;
+}
