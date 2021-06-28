@@ -5,43 +5,58 @@
  * Author: Rohit Mehta
  */
 
-const rps = ['rock','paper','scissors'];
+'use strict';
+
+const rps = ['rock', 'paper', 'scissors'];
 
 let playerSelection = '';
 let computerSelection = '';
 
-// get the user's input and store it in playerSelection
-let playerPlay = () => {
-    playerSelection = prompt('Rock, Paper, Scissors ').toLowerCase();
 
-    if (! rps.includes(playerSelection)) {
-        alert('Invalid Input!!!');
-        playerSelection = '';
-    }
+// set the playerSelecton depending on as
+// event p ('click' event) 's target is rock, paper or scissors
+const playUser = (p) => {
+    playerSelection = p.target.getAttribute('data-rps');
+
+    console.log(p.target.getAttribute('data-rps'));
+
+    //computer plays as the player plays so
+    playComputer();
+
+    // finally determine who won
+    playRound();
 }
 
-// get the computer's input and store it in computerSelection
-let computerPlay = () => {
+
+const userWeapons = Array.from(document.querySelectorAll('.rps'));
+userWeapons.forEach(weapon => {
+    weapon.addEventListener('click', playUser);
+});
+
+
+// the computer's choice of weapon randomly
+// also display it to the user
+const playComputer = () => {
     computerSelection = rps[Math.floor(Math.random() * rps.length)];
-}
+
+    // const compImg = document.querySelector('.computer');
+
+};
+
 
 // function to Play a single round and log the winner onto the console
-let playRound = () => {
-    
-    playerPlay();
-    computerPlay();
-
+function playRound() {
     // rock beats scissors
     // scissors beats paper
     // paper beats rock
 
     // using a compound condition:
-    if(playerSelection === 'rock' && computerSelection === 'scissors' ||
-       playerSelection === 'scissors' && computerSelection === 'paper'||
-       playerSelection === 'paper' && computerSelection === 'rock') {
-           console.log('You won! ' + playerSelection + ' beats ' + computerSelection);
+    if (playerSelection === 'rock' && computerSelection === 'scissors' ||
+        playerSelection === 'scissors' && computerSelection === 'paper' ||
+        playerSelection === 'paper' && computerSelection === 'rock') {
+        console.log('You won! ' + playerSelection + ' beats ' + computerSelection);
     }
-    else if(playerSelection === computerSelection) {
+    else if (playerSelection === computerSelection) {
         console.log('Tie! Both won.');
     }
     else {
@@ -49,10 +64,10 @@ let playRound = () => {
     }
 }
 
-// pass in the number of times to play the game
-let game = (i) => {
-    while(i-- > 0)
-        playRound();
-}
+// // pass in the number of times to play the game
+// let game = (i) => {
+//     while(i-- > 0)
+        // playRound();
+// }
 
-game(5);
+// game(5);
