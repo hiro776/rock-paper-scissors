@@ -72,9 +72,9 @@ const game = function (e) {
     if (playerScore === scoreLimit || compScore === scoreLimit)
         return;
 
-
+    e.target.style.cssText = 'transform: scale(110%); box-shadow:0 0 10px #a27a2c';
     const result = playRound(e.target.getAttribute('data-weapon'));
-    console.log(result)
+    // console.log(result)
 
     switch (result) {
         case 'win':
@@ -112,12 +112,15 @@ const game = function (e) {
         msgHandler.textContent = 'You Lose 😭';
     }
     else {
-        setTimeout(() => {
+        // pass the user click event to this arrow function 
+        // to remove the highlight styling
+        setTimeout((e) => {
             // ready for next round
             round++;
             displayRound.textContent = round;
+            e.target.style.cssText = '';
             msgHandler.textContent = 'Ready !';
-        }, 1000);
+        }, 700, e);
     }
 }
 
