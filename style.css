@@ -16,7 +16,7 @@
 
 html {
     /* width: 360px; */
-    height: 640px;
+    /* height: 640px; */
     overflow-y: scroll;
 }
 
@@ -134,7 +134,7 @@ img {
     background: rgba(253, 234, 196, 0.8);
 }
 
-.score-board > h2 {
+.score-board>h2 {
     font-family: 'Barlow', sans-serif;
     font-style: 22px;
     font-weight: bold;
@@ -150,4 +150,26 @@ img {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+@media (min-width: 600px) {
+    html {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    body {
+        /* margin: auto; */
+        width: 600px;
+        border: 1px solid #a27a2c;
+        border-radius: 25px;
+    }
+    header {
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+    }
+    .score-board {
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+    }
 }
