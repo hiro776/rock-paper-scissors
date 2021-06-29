@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
@@ -8,27 +9,41 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <header>Rock, Paper, Scissors</header>
+    <header><h1>Rock Paper Scissors</h1></header>
 
-    <div class="container">
-        
-        <div class="w-sec top">
-            <img class="computer" src="img/comp-play-img-rps.png">
-        </div>
-
-        <div class="w-sec">
-            <div class="status"></div>
-        </div>
-
-        <div class="w-sec user">
-            <img class="rps" data-rps='rock' src="img/rock.png">
-            <img class="rps" data-rps='paper' src="img/paper.png">
-            <img class="rps" data-rps='scissors' src="img/scissors.png">
-        </div>
-
+    <div class="round">
+        <span class="block">Round</span>
+        <span class="block number">1</span>
     </div>
+
+    <div class="rps">
+        <p>Choose Your Weapon :</p>
+        <div class="rps-weapon">
+            <img src="img/rock.png" class="block">
+            <img src="img/paper.png" class="block">
+            <img src="img/scissors.png" class="block">
+        </div>
+    </div>
+
+    <!-- Status section: display useful messages to the player -->
+    <div class="status"><p class="msg">Ready !</p></div>
     
+    <!-- scoreboard -->
+    <div class="score-board">
+        <h2>Score</h2>
+        <div class="score">
+            <span class="block">Player Score</span>
+            <span class="block" id="player-score">0</span>
+        </div>
+        <div class="score">
+            <span class="block">Computer Score</span>
+            <span class="block" id="comp-score">0</span>
+        </div>
+    </div>
+
     <script src="./app.js"></script>
 </body>
+
 </html>
