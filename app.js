@@ -7,73 +7,130 @@
 
 'use strict';
 
+// Rules of the Game are at the end of this file. See the alert() at the bottom.
+
+// weapon choices for comptpuer
 const rps = ['rock', 'paper', 'scissors'];
-
-let playerSelection = '';
-let computerSelection = '';
-
-// looking into computer's choices via pictures
-const compImg = document.querySelector('.computer');
-const compImgSrc = compImg.getAttribute('src');
-const status = document.querySelector('.status');
+const scoreLimit = 5;                       // Change this to change the winning score
 
 
-// set the playerSelecton depending on as
-// event p ('click' event) 's target is rock, paper or scissors
-const playUser = (p) => {
-    playerSelection = p.target.getAttribute('data-rps');
 
-    // p.target.style.cssText = 'box-shadow: 0 0 30px red';
+// a point where to print all messages
+const msgHandler = document.querySelector('.msg');
+// player score and computer score display location in the dom
+const dispalyPlayerScore = document.querySelector('#player-score');
+const displayCompScore = document.querySelector('#comp-score');
+// represents the dom element where to add textNode for displaying current round
+const displayRound = document.querySelector('div.round span.number');
 
-    // console.log(p.target.getAttribute('data-rps'));
-
-    //computer plays as the player plays so
-    playComputer();
-
-    // finally determine who won
-    playRound();
-
-    // reset all styling after 2 seconds
-    setTimeout(function () {
-        compImg.setAttribute('src', compImgSrc);
-        status.textContent = '';
-    }, 1000);
-
-}
-
-const userWeapons = Array.from(document.querySelectorAll('.rps'));
-userWeapons.forEach(weapon => {
-    weapon.addEventListener('click', playUser);
-});
+let round = parseInt(displayRound.childNodes[0].nodeValue);
+let playerScore = parseInt(dispalyPlayerScore.childNodes[0].nodeValue);
+let compScore = parseInt(displayCompScore.childNodes[0].nodeValue);
 
 
-// the computer's choice of weapon randomly
-// also display it to the user
-const playComputer = () => {
-    computerSelection = rps[Math.floor(Math.random() * rps.length)];
 
 
-    compImg.setAttribute('src', `img/${computerSelection}.png`);
-};
+// playRound ---- play the single round
+// 
+// arguments:
+//      playerWeapon --- player weapon, either 'rock', 'paper' or 'scissors'
+//
+// returns:
+//      'win' --- if the player has won
+//      'lose'   --- if the computer has won
+//      'tie'  --- if there's a tie
+const playRound = function (playerWeapon) {
+
+    const computerWeapon = rps[Math.floor(Math.random() * rps.length)];
+    //    console.log(computerWeapon);
 
 
-// function to Play a single round and log the winner onto the console
-function playRound() {
-    // rock beats scissors
-    // scissors beats paper
-    // paper beats rock
-
-    // using a compound condition:
-    if (playerSelection === 'rock' && computerSelection === 'scissors' ||
-        playerSelection === 'scissors' && computerSelection === 'paper' ||
-        playerSelection === 'paper' && computerSelection === 'rock') {
-        status.textContent = 'You won! ' + playerSelection + ' beats ' + computerSelection;
+    if (playerWeapon === 'rock' && computerWeapon === 'scissors' ||
+        playerWeapon === 'scissors' && computerWeapon === 'paper' ||
+        playerWeapon === 'paper' && computerWeapon === 'rock') {
+        // player wins
+        return 'win';
     }
-    else if (playerSelection === computerSelection) {
-        status.textContent = 'Tie! Both won.';
+    else if (playerWeapon === computerWeapon) {
+        // tie
+        return 'tie';
     }
     else {
-        status.textContent = 'You Lost! ' + computerSelection + ' beats ' + playerSelection;
+        // player loses
+        return 'lose';
+    }
+}
+
+
+
+
+// game() -- initialize the game
+//
+// Arguments:  
+//          e -- user click event
+const game = function (e) {
+    if (playerScore === scoreLimit || compScore === scoreLimit)
+        return;
+
+
+    const result = playRound(e.target.getAttribute('data-weapon'));
+    console.log(result)
+
+    switch (result) {
+        case 'win':
+            msgHandler.textContent = 'Round Won 🔥';
+            playerScore++;
+            break;
+
+        case 'tie':
+            msgHandler.textContent = 'Round Tied ⚖️';
+            playerScore++;
+            compScore++;
+            break;
+
+        case 'lose':
+            msgHandler.textContent = 'Round Lost 😩';
+            compScore++;
+            break;
+
+        default:
+            msgHandler.textContent = 'An Error Occured. (code 1)';
+            return;
     }
 
+
+    dispalyPlayerScore.textContent = playerScore;
+    displayCompScore.textContent = compScore;
+
+    // before exiting print win/lose msg
+    if (playerScore === scoreLimit) {
+        msgHandler.style.cssText = 'font-size: 2rem; background-color: rgba(241, 201, 124, 0.8)';
+        msgHandler.textContent = 'You Won 🎉';
+    }
+    else if (compScore === scoreLimit) {
+        msgHandler.style.cssText = 'font-size: 2rem; background-color: rgba(241, 201, 124, 0.8)';
+        msgHandler.textContent = 'You Lose 😭';
+    }
+    else {
+        setTimeout(() => {
+            // ready for next round
+            round++;
+            displayRound.textContent = round;
+            msgHandler.textContent = 'Ready !';
+        }, 1000);
+    }
 }
+
+
+
+// the user clickables (rock, paper and scissors)
+const usrClickables = Array.from(document.querySelectorAll('.rps-weapon img'));
+
+
+// add event listeners to user clickables which will 
+// trigger the playRound
+usrClickables.forEach(weapon => {
+    weapon.addEventListener('click', game);
+});
+
+alert('You will be playing a tense game of Rock, Paper & Scissors against the computer.\nRules are simple:\nWhoever reaches the score limit of 5 first wins.');
