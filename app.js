@@ -84,8 +84,6 @@ const game = function (e) {
 
         case 'tie':
             msgHandler.textContent = 'Round Tied ⚖️';
-            playerScore++;
-            compScore++;
             break;
 
         case 'lose':
