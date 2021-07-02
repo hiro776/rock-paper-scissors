@@ -101,6 +101,23 @@ img {
 
 /* ---- */
 
+/* Computer choice section */
+.computer {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    font-family: inherit;
+    font-size: small;
+    margin-left: 20px;
+}
+
+.choice {
+    margin-left: 10px;
+    font-size: 1.2em;
+    font-weight: bolder;
+}
+
+
 /* Status Box */
 
 .status {
@@ -109,10 +126,15 @@ img {
     height: 46px;
     text-align: center;
     border: 1px solid rgba(162, 122, 44, 0.79);
-    border-radius: 22px;
+    /* border-radius: 22px; */
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.status > em {
+    position:absolute;
+    left: 50px;
 }
 
 .status .msg {

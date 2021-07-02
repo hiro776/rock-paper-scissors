@@ -17,6 +17,8 @@ const scoreLimit = 5;                       // Change this to change the winning
 
 // a point where to print all messages
 const msgHandler = document.querySelector('.msg');
+// location in the DOM to show computer's weapon
+const compChoice = document.querySelector('.choice');
 // player score and computer score display location in the dom
 const dispalyPlayerScore = document.querySelector('#player-score');
 const displayCompScore = document.querySelector('#comp-score');
@@ -44,6 +46,7 @@ const playRound = function (playerWeapon) {
     const computerWeapon = rps[Math.floor(Math.random() * rps.length)];
     //    console.log(computerWeapon);
 
+    compChoice.textContent = computerWeapon;
 
     if (playerWeapon === 'rock' && computerWeapon === 'scissors' ||
         playerWeapon === 'scissors' && computerWeapon === 'paper' ||
@@ -113,12 +116,12 @@ const game = function (e) {
         // pass the user click event to this arrow function 
         // to remove the highlight styling
         setTimeout((e) => {
-            // ready for next round
             round++;
             displayRound.textContent = round;
             e.target.style.cssText = '';
             msgHandler.textContent = 'Ready !';
-        }, 700, e);
+            compChoice.textContent = '';
+        }, 1000, e);
     }
 }
 
