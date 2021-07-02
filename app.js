@@ -107,10 +107,14 @@ const game = function (e) {
     if (playerScore === scoreLimit) {
         msgHandler.style.cssText = 'font-size: 2rem; background-color: rgba(241, 201, 124, 0.8)';
         msgHandler.textContent = 'You Won 🎉';
+
+        alert('Game Over !!!');
     }
     else if (compScore === scoreLimit) {
         msgHandler.style.cssText = 'font-size: 2rem; background-color: rgba(241, 201, 124, 0.8)';
         msgHandler.textContent = 'You Lose 😭';
+
+        alert('Game Over !!!');
     }
     else {
         // pass the user click event to this arrow function 
